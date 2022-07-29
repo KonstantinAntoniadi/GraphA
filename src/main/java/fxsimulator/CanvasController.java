@@ -554,12 +554,6 @@ public class CanvasController implements Initializable, ChangeListener {
     }
     @FXML
     public void RandomEdge(ActionEvent event){
-        System.out.println("RANDOM");
-//        System.out.println("RealEdges" + realEdges);
-        System.out.println("Circles" + circles);
-//        System.out.println("MstEdged" + mstEdges);
-//        System.out.println("Edges" + edges);
-
         boolean[][] mas = new boolean[circles.size()][circles.size()];
         Random r = new Random();
         for (int i = 0; i < mas.length; i++){
@@ -572,13 +566,24 @@ public class CanvasController implements Initializable, ChangeListener {
         for (int i = 0; i < mas.length; i++){
             for (int j = 0; j < i; j++){
                 if (mas[i][j]){
-                    edgeLine = new Line(circles.get(i).point.x, circles.get(i).point.y, circles.get(j).point.x, circles.get(j).point.y);
+                    NodeFX nodeI = circles.get(i);
+                    NodeFX nodeJ = circles.get(j);
+                    edgeLine = new Line(nodeI.point.x, nodeI.point.y, nodeJ.point.x, nodeJ.point.y);
                     canvasGroup.getChildren().add(edgeLine);
                     edgeLine.setId("line");
+
+                    weight = new Label("1");
+                    nodeI.node.adjacents.add(new Edge(nodeI.node, nodeJ.node, Double.valueOf(weight.getText()), edgeLine, weight));
+//                    selectedNode.node.adjacents.add(new Edge(selectedNode.node, circle.node, Double.valueOf(weight.getText()), edgeLine, weight));
+                    nodeJ.node.adjacents.add(new Edge(nodeJ.node, nodeI.node, Double.valueOf(weight.getText()), edgeLine, weight));
+//                    circle.node.adjacents.add(new Edge(circle.node, selectedNode.node, Double.valueOf(weight.getText()), edgeLine, weight));
+                    edges.add(edgeLine);
+                    realEdges.add(nodeI.node.adjacents.get(nodeI.node.adjacents.size() - 1));
+                    realEdges.add(nodeJ.node.adjacents.get(nodeJ.node.adjacents.size() - 1));
+//                    line_arrow = edgeLine;
                 }
             }
         }
-        System.out.println(Arrays.deepToString(mas));
     }
 
     /**
