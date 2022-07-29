@@ -133,7 +133,7 @@ public class CanvasController implements Initializable, ChangeListener {
         canvasBackButton.setOnAction(e -> {
             try {
                 ResetHandle(null);
-                FXMLLoader fxmlLoader = new FXMLLoader(CanvasController.class.getResource("Panel1FXML.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(CanvasController.class.getResource("../res/Panel1FXML.fxml"));
                 fxmlLoader.setLocation(CanvasController.class.getResource("/Panel1FXML.fxml"));
                 //Parent root = FXMLLoader.load(getClass().getResource("Panel1FXML.fxml"));
                 Parent root = fxmlLoader.load();
@@ -551,6 +551,34 @@ public class CanvasController implements Initializable, ChangeListener {
         mstButton.setDisable(true);
         playing = false;
         paused = false;
+    }
+    @FXML
+    public void RandomEdge(ActionEvent event){
+        System.out.println("RANDOM");
+//        System.out.println("RealEdges" + realEdges);
+        System.out.println("Circles" + circles);
+//        System.out.println("MstEdged" + mstEdges);
+//        System.out.println("Edges" + edges);
+
+        boolean[][] mas = new boolean[circles.size()][circles.size()];
+        Random r = new Random();
+        for (int i = 0; i < mas.length; i++){
+            for (int j = 0; j < i; j++){
+                boolean n = r.nextBoolean();
+                mas[i][j] = n;
+                mas[j][i] = n;
+            }
+        }
+        for (int i = 0; i < mas.length; i++){
+            for (int j = 0; j < i; j++){
+                if (mas[i][j]){
+                    edgeLine = new Line(circles.get(i).point.x, circles.get(i).point.y, circles.get(j).point.x, circles.get(j).point.y);
+                    canvasGroup.getChildren().add(edgeLine);
+                    edgeLine.setId("line");
+                }
+            }
+        }
+        System.out.println(Arrays.deepToString(mas));
     }
 
     /**
