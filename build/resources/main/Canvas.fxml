@@ -22,6 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Tooltip?>
 <?import com.jfoenix.controls.JFXNodesList?>
+
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxsimulator.CanvasController">
    <children>
       <StackPane fx:id="stackRoot" prefHeight="620.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -44,7 +45,7 @@
             </HiddenSidesPane>
             <ImageView fx:id="openHidden" fitHeight="44.0" fitWidth="44.0" layoutX="856.0" layoutY="289.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="287.0" AnchorPane.rightAnchor="-8.0" AnchorPane.topAnchor="289.0">
                <image>
-                  <Image url="@/res/openHidden.png" />
+                  <Image url="@/openHidden.png" />
                </image>
             </ImageView>
             <AnchorPane prefHeight="580.0" prefWidth="200.0" style="-fx-background-color: #3b5998;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -53,12 +54,12 @@
                      <graphic>
                         <ImageView fx:id="canvasBack" fitHeight="29.0" fitWidth="28.0" pickOnBounds="true">
                            <image>
-                              <Image url="@/res/arrow_back_black_96x96.png" />
+                              <Image url="@/arrow_back_black_96x96.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <HBox alignment="CENTER" layoutX="10.0" layoutY="519.0" prefHeight="61.0" prefWidth="181.0" spacing="10.0" AnchorPane.bottomAnchor="0.0">
+                  <VBox alignment="CENTER" layoutX="10.0" layoutY="519.0" prefHeight="61.0" prefWidth="181.0" spacing="10.0" AnchorPane.bottomAnchor="0.0">
                      <children>
                         <JFXButton fx:id="clearButton" buttonType="RAISED" onAction="#ClearHandle" prefHeight="31.0" prefWidth="76.0" style="-fx-background-color: #21759b;" text="CLEAR" textFill="#d3c5c5">
                            <font>
@@ -76,6 +77,15 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </JFXButton>
+
+                        <JFXButton fx:id="randomButton" buttonType="RAISED" onAction="#RandomEdge" prefHeight="31.0" prefWidth="150.0" style="-fx-background-color: #21759b;" text="RANDOM EDGE" textFill="#d3c5c5">
+                           <font>
+                              <Font name="Junction Regular Regular" size="13.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
                      </children>
                      <opaqueInsets>
                         <Insets />
@@ -83,7 +93,7 @@
                      <padding>
                         <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
                      </padding>
-                  </HBox>
+                  </VBox>
                   <GridPane hgap="10.0" layoutX="1.0" layoutY="88.0" prefHeight="269.0" prefWidth="200.0" vgap="5.0">
                      <columnConstraints>
                         <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -159,7 +169,7 @@
                         <Insets left="5.0" right="5.0" />
                      </padding>
                   </GridPane>
-                  <VBox layoutX="20.0" layoutY="395.0" prefHeight="102.0" prefWidth="162.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="18.0">
+                  <VBox layoutX="20.0" layoutY="300.0" prefHeight="102.0" prefWidth="162.0" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="18.0">
                      <children>
                         <JFXToggleButton fx:id="addNodeButton" onAction="#AddNodeHandle" prefHeight="19.0" prefWidth="162.0" text="Add Node" textFill="#d3c5c5" toggleGroup="$algoToggleGroup">
                            <font>
@@ -180,7 +190,7 @@
                      <graphic>
                         <ImageView fx:id="playPauseImage" fitHeight="28.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@/res/pause_black_48x48.png" />
+                              <Image url="@/pause_black_48x48.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -198,7 +208,7 @@
                            <graphic>
                               <ImageView fitHeight="28.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@/res/fast_forward_black_48x48.png" />
+                                    <Image url="@/fast_forward_black_48x48.png" />
                                  </image>
                               </ImageView>
                            </graphic>

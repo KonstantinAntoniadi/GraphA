@@ -21,7 +21,7 @@ public class FXSimulatorMain extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         primaryStage = stage;
-        FXMLLoader fxmlLoader = new FXMLLoader(FXSimulatorMain.class.getResource("Panel1FXML.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(FXSimulatorMain.class.getResource("../res/Panel1FXML.fxml"));
         fxmlLoader.setLocation(FXSimulatorMain.class.getResource("/Panel1FXML.fxml"));
         //Parent root = FXMLLoader.load(getClass().getResource("Panel1FXML.fxml"));
         Parent root = fxmlLoader.load();

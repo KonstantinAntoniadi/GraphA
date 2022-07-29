@@ -108,7 +108,7 @@ public class Panel1Controller implements Initializable {
 
     void loadNextScene() {
         try {
-            FXMLLoader loader = new FXMLLoader(Panel1Controller.class.getResource("Canvas.fxml"));
+            FXMLLoader loader = new FXMLLoader(Panel1Controller.class.getResource("../res/Canvas.fxml"));
             loader.setLocation(Panel1Controller.class.getResource("/Canvas.fxml"));
             Parent root = loader.load();
             Scene newScene = new Scene(root);

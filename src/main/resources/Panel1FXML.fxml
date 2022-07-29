@@ -58,7 +58,7 @@
                <graphic>
                   <ImageView fitHeight="33.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@/res/right-arrow.png" />
+                        <Image url="@/right-arrow.png" />
                      </image>
                   </ImageView>
                </graphic>
