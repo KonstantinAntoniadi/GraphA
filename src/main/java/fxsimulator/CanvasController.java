@@ -54,7 +54,7 @@ public class CanvasController implements Initializable, ChangeListener {
     @FXML
     private StackPane stackRoot;
     @FXML
-    private JFXButton canvasBackButton, clearButton, resetButton, playPauseButton;
+    private JFXButton canvasBackButton, clearButton, resetButton, playPauseButton, randomButton;
     @FXML
     private JFXToggleButton addNodeButton, addEdgeButton, bfsButton, dfsButton, topSortButton, dijkstraButton,
             articulationPointButton, mstButton;
@@ -81,6 +81,7 @@ public class CanvasController implements Initializable, ChangeListener {
 
     boolean menuBool = false;
     ContextMenu globalMenu;
+    boolean[][] randomMas = null;
 
     int nNode = 0, time = 500;
     NodeFX selectedNode = null;
@@ -551,35 +552,40 @@ public class CanvasController implements Initializable, ChangeListener {
         mstButton.setDisable(true);
         playing = false;
         paused = false;
+
+        randomMas = null;
     }
     @FXML
     public void RandomEdge(ActionEvent event){
-        boolean[][] mas = new boolean[circles.size()][circles.size()];
-        Random r = new Random();
-        for (int i = 0; i < mas.length; i++){
-            for (int j = 0; j < i; j++){
-                boolean n = r.nextBoolean();
-                mas[i][j] = n;
-                mas[j][i] = n;
+        if (randomMas == null){
+            randomMas = new boolean[circles.size()][circles.size()];
+            Random r = new Random();
+            for (int i = 0; i < randomMas.length; i++){
+                for (int j = 0; j < i; j++){
+                    boolean n = r.nextBoolean();
+                    randomMas[i][j] = n;
+                    randomMas[j][i] = n;
+                }
             }
-        }
-        for (int i = 0; i < mas.length; i++){
-            for (int j = 0; j < i; j++){
-                if (mas[i][j]){
-                    NodeFX nodeI = circles.get(i);
-                    NodeFX nodeJ = circles.get(j);
-                    edgeLine = new Line(nodeI.point.x, nodeI.point.y, nodeJ.point.x, nodeJ.point.y);
-                    canvasGroup.getChildren().add(edgeLine);
-                    edgeLine.setId("line");
-                    weight = new Label("1");
-                    nodeI.node.adjacents.add(new Edge(nodeI.node, nodeJ.node, Double.valueOf(weight.getText()), edgeLine, weight));
-                    nodeJ.node.adjacents.add(new Edge(nodeJ.node, nodeI.node, Double.valueOf(weight.getText()), edgeLine, weight));
-                    edges.add(edgeLine);
-                    realEdges.add(nodeI.node.adjacents.get(nodeI.node.adjacents.size() - 1));
-                    realEdges.add(nodeJ.node.adjacents.get(nodeJ.node.adjacents.size() - 1));
+            for (int i = 0; i < randomMas.length; i++){
+                for (int j = 0; j < i; j++){
+                    if (randomMas[i][j]){
+                        NodeFX nodeI = circles.get(i);
+                        NodeFX nodeJ = circles.get(j);
+                        edgeLine = new Line(nodeI.point.x, nodeI.point.y, nodeJ.point.x, nodeJ.point.y);
+                        canvasGroup.getChildren().add(edgeLine);
+                        edgeLine.setId("line");
+                        weight = new Label("1");
+                        nodeI.node.adjacents.add(new Edge(nodeI.node, nodeJ.node, Double.valueOf(weight.getText()), edgeLine, weight));
+                        nodeJ.node.adjacents.add(new Edge(nodeJ.node, nodeI.node, Double.valueOf(weight.getText()), edgeLine, weight));
+                        edges.add(edgeLine);
+                        realEdges.add(nodeI.node.adjacents.get(nodeI.node.adjacents.size() - 1));
+                        realEdges.add(nodeJ.node.adjacents.get(nodeJ.node.adjacents.size() - 1));
+                    }
                 }
             }
         }
+
     }
 
     /**
