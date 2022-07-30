@@ -571,7 +571,6 @@ public class CanvasController implements Initializable, ChangeListener {
                     edgeLine = new Line(nodeI.point.x, nodeI.point.y, nodeJ.point.x, nodeJ.point.y);
                     canvasGroup.getChildren().add(edgeLine);
                     edgeLine.setId("line");
-
                     weight = new Label("1");
                     nodeI.node.adjacents.add(new Edge(nodeI.node, nodeJ.node, Double.valueOf(weight.getText()), edgeLine, weight));
                     nodeJ.node.adjacents.add(new Edge(nodeJ.node, nodeI.node, Double.valueOf(weight.getText()), edgeLine, weight));
