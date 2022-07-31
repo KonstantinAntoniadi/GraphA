@@ -557,34 +557,45 @@ public class CanvasController implements Initializable, ChangeListener {
     }
     @FXML
     public void RandomEdge(ActionEvent event){
-        if (randomMas == null){
-            randomMas = new boolean[circles.size()][circles.size()];
-            Random r = new Random();
-            for (int i = 0; i < randomMas.length; i++){
-                for (int j = 0; j < i; j++){
-                    boolean n = r.nextBoolean();
-                    randomMas[i][j] = n;
-                    randomMas[j][i] = n;
-                }
+        ArrayList nodes = new ArrayList<>();
+        for (javafx.scene.Node x : canvasGroup.getChildren()){
+            if (x.getId() == "line") nodes.add(x);
+        }
+        canvasGroup.getChildren().removeAll(nodes);
+        edges.removeAll(nodes);
+        realEdges.clear();
+        for (int i = 0; i < circles.size(); i++){
+            circles.get(i).node.adjacents.clear();
+        }
+
+
+        randomMas = new boolean[circles.size()][circles.size()];
+        Random r = new Random();
+        for (int i = 0; i < randomMas.length; i++){
+            for (int j = 0; j < i; j++){
+                boolean n = r.nextBoolean();
+                randomMas[i][j] = n;
+                randomMas[j][i] = n;
             }
-            for (int i = 0; i < randomMas.length; i++){
-                for (int j = 0; j < i; j++){
-                    if (randomMas[i][j]){
-                        NodeFX nodeI = circles.get(i);
-                        NodeFX nodeJ = circles.get(j);
-                        edgeLine = new Line(nodeI.point.x, nodeI.point.y, nodeJ.point.x, nodeJ.point.y);
-                        canvasGroup.getChildren().add(edgeLine);
-                        edgeLine.setId("line");
-                        weight = new Label("1");
-                        nodeI.node.adjacents.add(new Edge(nodeI.node, nodeJ.node, Double.valueOf(weight.getText()), edgeLine, weight));
-                        nodeJ.node.adjacents.add(new Edge(nodeJ.node, nodeI.node, Double.valueOf(weight.getText()), edgeLine, weight));
-                        edges.add(edgeLine);
-                        realEdges.add(nodeI.node.adjacents.get(nodeI.node.adjacents.size() - 1));
-                        realEdges.add(nodeJ.node.adjacents.get(nodeJ.node.adjacents.size() - 1));
-                    }
+        }
+        for (int i = 0; i < randomMas.length; i++){
+            for (int j = 0; j < i; j++){
+                if (randomMas[i][j]){
+                    NodeFX nodeI = circles.get(i);
+                    NodeFX nodeJ = circles.get(j);
+                    edgeLine = new Line(nodeI.point.x, nodeI.point.y, nodeJ.point.x, nodeJ.point.y);
+                    canvasGroup.getChildren().add(edgeLine);
+                    edgeLine.setId("line");
+                    weight = new Label("1");
+                    nodeI.node.adjacents.add(new Edge(nodeI.node, nodeJ.node, Double.valueOf(weight.getText()), edgeLine, weight));
+                    nodeJ.node.adjacents.add(new Edge(nodeJ.node, nodeI.node, Double.valueOf(weight.getText()), edgeLine, weight));
+                    edges.add(edgeLine);
+                    realEdges.add(nodeI.node.adjacents.get(nodeI.node.adjacents.size() - 1));
+                    realEdges.add(nodeJ.node.adjacents.get(nodeJ.node.adjacents.size() - 1));
                 }
             }
         }
+
 
     }
 
